@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hackathon JS - Avoid & Survive</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+  <div class="game-container" id="game-container">
+    <div class="hud">
+      <div>Puntos: <span id="score">0</span></div>
+      <div>Récord: <span id="high-score">0</span></div>
+
+      <div class="coche"></div>
+
+    </div>
+
+    <!-- Jugador representado con DOM (Emoji o elemento estilizado) -->
+    <div id="player"><img src="./90a8bpvuvmda1.gif" alt="peaton" width="40px"></div>
+
+    <!-- Capa de Game Over -->
+    <div id="game-over-screen" class="overlay hidden">
+      <h1>¡GAME OVER!</h1>
+      <p>Te has quedado sin vidas.</p>
+      <button id="restart-btn">Jugar de nuevo</button>
+    </div>
+  </div>
+
+
+  <script src="index.js"></script>
+</body>
+</html>
