@@ -6,18 +6,19 @@ const highScoreEl = document.getElementById('high-score');
 const gameOverScreen = document.getElementById('game-over-screen');
 const restartBtn = document.getElementById('restart-btn');
 
+
 // 2. Variables de Estado
-let playerX = 180;
-let playerY = container.clientHeight - 80; // posición inicial: abajo
-const playerSpeed = 4;
+let playerX = 60;                          // antes 180 - 120
+let playerY = container.clientHeight - 380; // antes (altura - 80) - 300
+const playerSpeed = 2;
 let score = 0;
 let gameOver = false;
 let gameInterval;
 let bugSpawnInterval;
 
 // Colocamos al jugador en su posición inicial
-player.style.left = `${playerX -120}px`;
-player.style.top = `${playerY - 300}px`;
+player.style.left = `${playerX}px`;
+player.style.top = `${playerY}px`;
 
 // 3. Controles del Teclado
 document.addEventListener('keydown', (e) => {
@@ -129,3 +130,36 @@ let gameInterval2 = setInterval(function() {
 
 
 
+function terminarJuego() {
+  gameOver = true;
+  clearInterval(bugSpawnInterval2);
+  clearInterval(gameInterval2);
+  gameOverScreen.classList.remove('hidden');
+}
+
+restartBtn.addEventListener('click', () => {
+  location.reload(); // la forma más simple de reiniciar
+});
+
+let gameInterval3 = setInterval(function() {
+
+    for (let i = 0; i < coches.length; i++) {
+
+        let coche = coches[i];
+        coche.y += coche.velocidad * coche.direccion;
+        coche.elemento.style.top = coche.y + "px";
+
+        // ¡Colisión con el jugador!
+        if (checkCollision(player, coche.elemento)) {
+            terminarJuego();
+            return;
+        }
+
+        if (coche.y > container.clientHeight || coche.y < -100) {
+            coche.elemento.remove();
+            coches.splice(i, 1);
+            i--;
+        }
+    }
+
+}, 20);
